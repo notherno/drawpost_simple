@@ -13,15 +13,15 @@
     <div id="wrapper">
         <h1>Picture Gallery</h1>
         <a href="index.html">Drawing</a>
+        <ul id="gallery_list">
 <?php
-    echo '<ul id="gallery_list">';
     foreach ($files as $file) {
         if (pathinfo($file, PATHINFO_EXTENSION) == 'png') {
-            echo '<li><img src="' . $UPLOAD_DIR . $file . '"></li>';
+            echo '<li><img src="' . $UPLOAD_DIR . $file . '"></li>' . PHP_EOL;
         }
     }
-    echo '</ul>';
 ?>
+    </ul>
     </div>
 </body>
 </html>
