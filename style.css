@@ -1,0 +1,58 @@
+body {
+	background-color: #DDD;
+}
+
+#wrapper {
+	margin: 0 auto;
+	width: 800px;
+}
+
+#draw_canvas {
+	background-color: #FFF;
+	display: block;
+	margin: 0 auto;
+}
+
+#controls {
+	width: 500px;
+	margin: 10px auto;
+	overflow: hidden;
+}
+
+input#line_width {
+	width: 80%;
+	display: block;
+	float: left;
+}
+
+input#color_picker {
+	float: left;
+    display: block;
+    margin: 2px;
+    width: 8%;
+}
+
+output#line_indicator {
+	display: block;
+	width: 8%;
+	float: right;
+}
+
+button#submit {
+    clear: both;
+    display: block;
+    width: 200px;
+    font-size: 150%;
+    background-color: lightgreen;
+    margin: 30px auto;
+}
+
+button#clear {
+    clear: both;
+    display: block;
+    width: 200px;
+    font-size: 150%;
+    background-color: lightblue;
+    margin: 30px auto;
+}
+

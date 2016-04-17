@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>canvas simple drawing</title>
+
+	<link rel="stylesheet" href="style.css">
+    <script src="drawing.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>canvas simple drawing</h1>
+        <canvas id="draw_canvas" width="500" height="400"></canvas>
+        <div id="controls">
+            <input type="color" id="color_picker">
+            <input type="range" id="line_width" min="1" max="20" step="1" value="3">
+            <output id="line_indicator">3</output>
+            <button id="submit">Submit picture</button>
+            <button id="clear">Clear picture</button>
+        </div>
+    </div>
+
+    <script>
+        var canvas = new DrawCanvas('draw_canvas');
+        var line_slider = document.getElementById('line_width');
+        var color_picker = document.getElementById('color_picker');
+
+        canvas.context.lineWidth = line_slider.value;
+        canvas.context.strokeStyle = color_picker.value;
+
+        line_slider.addEventListener('change', function(ev) {
+            var val = ev.target.value;
+            canvas.context.lineWidth = val;
+            document.getElementById('line_indicator').innerText = val;
+        }, false);
+
+        color_picker.addEventListener('change', function(ev) {
+            var val = ev.target.value;
+            canvas.context.strokeStyle = val;
+        }, false);
+
+        document.getElementById('submit').addEventListener('click', function(ev) {
+            canvas.submitImg('receive.php');
+        })
+
+        document.getElementById('clear').addEventListener('click', function(ev) {
+            canvas.initialize();
+        })
+
+    </script>
+</body>
+</html>
+
