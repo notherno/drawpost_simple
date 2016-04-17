@@ -56,3 +56,7 @@ button#clear {
     margin: 30px auto;
 }
 
+#gallery_list {
+    list-style-type: none;
+}
+
