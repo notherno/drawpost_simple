@@ -30,41 +30,41 @@
 
     <script>
         var canvas,
-            $ = function(id) { return document.getElementById(id); },
+            $$ = function(id) { return document.getElementById(id); },
             bind = function(elm, ev, func) { elm.addEventListener(ev, func, false); };
 
         var generateCanvas = function() {
-            var width = $('input_width').value;
-            var height = $('input_height').value;
+            var width = $$('input_width').value;
+            var height = $$('input_height').value;
             var cv = new DrawCanvas('draw_canvas', width, height); 
 
-            cv.context.lineWidth = $('line_width').value;
-            cv.context.strokeStyle = $('color_picker').value;
+            cv.context.lineWidth = $$('line_width').value;
+            cv.context.strokeStyle = $$('color_picker').value;
 
             return cv;
         };
         canvas = generateCanvas();
 
-        bind($('line_width'), 'change', function(ev) {
+        bind($$('line_width'), 'change', function(ev) {
             var val = ev.target.value;
             canvas.context.lineWidth = val;
-            $('line_indicator').innerText = val;
+            $$('line_indicator').innerText = val;
         });
 
-        bind($('color_picker'), 'change', function(ev) {
+        bind($$('color_picker'), 'change', function(ev) {
             var val = ev.target.value;
             canvas.context.strokeStyle = val;
         });
 
-        bind($('resize_canvas'), 'click', function(ev) {
+        bind($$('resize_canvas'), 'click', function(ev) {
             canvas = generateCanvas();
         });
 
-        bind($('submit'), 'click', function(ev) {
+        bind($$('submit'), 'click', function(ev) {
             canvas.submitImg('receive.php');
         });
 
-        bind($('clear'), 'click', function(ev) {
+        bind($$('clear'), 'click', function(ev) {
             canvas.initialize();
         });
 
