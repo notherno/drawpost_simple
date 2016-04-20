@@ -3,12 +3,12 @@
  */
 
 var DrawCanvas = (function() {
-    function DrawCanvas(canvasid) {
+    function DrawCanvas(canvasid, width, height) {
         this.canvas = document.getElementById(canvasid);
         this.context = this.canvas.getContext('2d');
 
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
+        this.width = this.canvas.width = width;
+        this.height = this.canvas.height = height;
 
         this.addEvents();
         this.started = false;

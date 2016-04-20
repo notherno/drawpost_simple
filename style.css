@@ -19,6 +19,14 @@ body {
 	overflow: hidden;
 }
 
+#resize_area {
+    margin: 5px;
+}
+
+#resize_area input[type=text] {
+    width: 5em;
+}
+
 input#line_width {
 	width: 80%;
 	display: block;

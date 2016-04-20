@@ -11,7 +11,14 @@
     <div id="wrapper">
         <h1>canvas Simple Drawing</h1>
         <a href="gallery.php">Gallery</a>
-        <canvas id="draw_canvas" width="500" height="400"></canvas>
+
+        <div id="resize_area">
+            <input type="number" id="input_width" value="500">x<input type="number" id="input_height" value="400">
+            <button id="resize_canvas">Resize</button>
+        </div>
+
+        <canvas id="draw_canvas"></canvas>
+
         <div id="controls">
             <input type="color" id="color_picker">
             <input type="range" id="line_width" min="1" max="20" step="1" value="3">
@@ -22,31 +29,44 @@
     </div>
 
     <script>
-        var canvas = new DrawCanvas('draw_canvas');
-        var line_slider = document.getElementById('line_width');
-        var color_picker = document.getElementById('color_picker');
+        var canvas,
+            $ = function(id) { return document.getElementById(id); },
+            bind = function(elm, ev, func) { elm.addEventListener(ev, func, false); };
 
-        canvas.context.lineWidth = line_slider.value;
-        canvas.context.strokeStyle = color_picker.value;
+        var generateCanvas = function() {
+            var width = $('input_width').value;
+            var height = $('input_height').value;
+            var cv = new DrawCanvas('draw_canvas', width, height); 
 
-        line_slider.addEventListener('change', function(ev) {
+            cv.context.lineWidth = $('line_width').value;
+            cv.context.strokeStyle = $('color_picker').value;
+
+            return cv;
+        };
+        canvas = generateCanvas();
+
+        bind($('line_width'), 'change', function(ev) {
             var val = ev.target.value;
             canvas.context.lineWidth = val;
-            document.getElementById('line_indicator').innerText = val;
-        }, false);
+            $('line_indicator').innerText = val;
+        });
 
-        color_picker.addEventListener('change', function(ev) {
+        bind($('color_picker'), 'change', function(ev) {
             var val = ev.target.value;
             canvas.context.strokeStyle = val;
-        }, false);
+        });
 
-        document.getElementById('submit').addEventListener('click', function(ev) {
+        bind($('resize_canvas'), 'click', function(ev) {
+            canvas = generateCanvas();
+        });
+
+        bind($('submit'), 'click', function(ev) {
             canvas.submitImg('receive.php');
-        }, false)
+        });
 
-        document.getElementById('clear').addEventListener('click', function(ev) {
+        bind($('clear'), 'click', function(ev) {
             canvas.initialize();
-        }, false)
+        });
 
     </script>
 </body>
