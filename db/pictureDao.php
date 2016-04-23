@@ -21,6 +21,13 @@ class PictureDao {
         return $results;
     }
 
+    public function count_pictures () {
+        $statement = $this->handle->prepare("SELECT count(*) FROM pictures;");
+
+        $resx = $statement->execute()->fetchArray();
+        return $resx[0];
+    }
+
     public function save_picture ($title, $filename) {
         $statement = $this->handle->prepare(
             "INSERT INTO pictures (title, src, created) VALUES (:title, :filename, :timestamp);"
