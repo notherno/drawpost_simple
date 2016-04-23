@@ -55,8 +55,11 @@ var DrawCanvas = (function() {
 
         // Add event listeners to the canvas
         this.canvas.addEventListener('mousedown', line_start, false);
+        this.canvas.addEventListener('touchstart', line_start, false);
         this.canvas.addEventListener('mouseup', line_end, false);
+        this.canvas.addEventListener('touchend', line_end, false);
         this.canvas.addEventListener('mousemove', line_move, false);
+        this.canvas.addEventListener('touchmove', line_move, false);
     };
 
     DrawCanvas.prototype.initialize = function() {
