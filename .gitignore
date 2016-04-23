@@ -1,3 +1,4 @@
 upload/*
 !upload/readme.md
 .DS_Store
+db.sqlite
