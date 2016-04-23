@@ -52,14 +52,20 @@ var DrawCanvas = (function() {
         this.context.setLineDash([]);
     };
 
-    DrawCanvas.prototype.submitImg = function(url) {
-        var dataurl = this.canvas.toDataURL();
-        var canvas = this;
+    DrawCanvas.prototype.submitImg = function(url, param) {
+        var dataurl = this.canvas.toDataURL(),
+            canvas = this,
+            params = '';
+
+        for (var key in param) {
+            params += ('&' + key + '=' + encodeURIComponent(param[key]));
+        }
+        var data = 'img=' + encodeURIComponent(dataurl) + params;
 
         var request = new XMLHttpRequest();
         request.open('POST', url);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send('img=' + encodeURIComponent(dataurl));
+        request.send(data);
 
         request.onreadystatechange = function() {
             if (request.readyState === 4) {

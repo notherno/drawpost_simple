@@ -12,6 +12,7 @@
         <h1>canvas Simple Drawing</h1>
         <a href="gallery.php">Gallery</a>
 
+        <input type="text" id="title_area">
         <div id="resize_area">
             <input type="number" id="input_width" value="500">x<input type="number" id="input_height" value="400">
             <button id="resize_canvas">Resize</button>
@@ -61,7 +62,8 @@
         });
 
         bind($$('submit'), 'click', function(ev) {
-            canvas.submitImg('receive.php');
+            var title = $$('title_area').value;
+            canvas.submitImg('receive.php', {title: title});
         });
 
         bind($$('clear'), 'click', function(ev) {
