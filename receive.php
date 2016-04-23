@@ -1,4 +1,6 @@
 <?php
+    require_once('db/pictureDao.php');
+
     $fmt = 'Ymd_His'; // Datetime format for image filename
     $dist = '/upload';
     $DIR = dirname(__file__) . $dist;
@@ -8,6 +10,7 @@
     $filename = 'image_' . $datetime->format($fmt) . '.png';
 
     $dataurl = isset($_POST['img']) ? $_POST['img'] : NULL;
+    $title = isset($_POST['title']) && $_POST['title'] ? $_POST['title'] : 'Untitled';
 
     if (! $dataurl) {
         http_response_code(400);
@@ -25,6 +28,10 @@
         http_response_code(500);
         exit('Permission Error: Please confirm file writing permission');
     }
+
+    // Data inserion into SQLite3 database
+    $dao = new PictureDao('db/db.sqlite');
+    $dao->save_picture($title, $filename);
 
     http_response_code(200);
     exit($dist . '/' . $filename);
