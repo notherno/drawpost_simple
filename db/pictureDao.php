@@ -9,7 +9,9 @@ class PictureDao {
     }
 
     public function get_pictures ($offset, $limit) {
-        $statement = $this->handle->prepare("SELECT * FROM pictures ORDER BY created DESC LIMIT :limit OFFSET :offset;");
+        $statement = $this->handle->prepare(
+                "SELECT * FROM pictures ORDER BY created DESC LIMIT :limit OFFSET :offset;"
+            );
         $statement->bindValue(':limit', $limit);
         $statement->bindValue(':offset', $offset);
 
