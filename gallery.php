@@ -1,7 +1,9 @@
 <?php
+    require_once('db/pictureDao.php');
+    $dao = new PictureDao('db/db.sqlite');
+    $pictures = $dao->get_pictures(0, 50);
 
     $UPLOAD_DIR = 'upload/';
-    $files = scandir($UPLOAD_DIR, SCANDIR_SORT_ASCENDING);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -15,10 +17,16 @@
         <a href="index.html">Drawing</a>
         <ul id="gallery_list">
 <?php
-    foreach ($files as $file) {
-        if (pathinfo($file, PATHINFO_EXTENSION) == 'png') {
-            echo '<li><img src="' . $UPLOAD_DIR . $file . '"></li>' . PHP_EOL;
-        }
+    foreach ($pictures as $pic) {
+?>
+            <li>
+                <h2><?php echo $pic['title']; ?></h2>
+                <time><?php echo $pic['created']; ?></time>
+                <div>
+                    <img src="<?php echo $UPLOAD_DIR . $pic['src']; ?>">
+                </div>
+            </li>
+<?php
     }
 ?>
     </ul>
