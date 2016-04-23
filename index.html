@@ -4,31 +4,88 @@
     <meta charset="utf-8">
     <title>canvas Simple Drawing</title>
 
-	<link rel="stylesheet" href="style.css">
-    <script src="drawing.js"></script>
+	<link rel="stylesheet" href="css/kickstart.css">
+    <script src="js/jscolor.min.js"></script>
+    <script src="js/drawing.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background:#efefef url(css/img/gray_jean.png);
+        }
+
+        #header {
+            margin: 0;
+            text-align: center;
+        }
+
+        #header h1 {
+            font-size: 2em;
+        }
+
+        #color_picker {
+            width: 50px;
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+		input[type=range]{
+			-webkit-appearance: none;
+            margin-top: -2px;
+		}
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+		input[type=range]::-webkit-slider-runnable-track {
+			height: 8px;
+			border: none;
+			border-radius: 3px;
+		}
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            pointer: cursor;
+			background: goldenrod;
+            margin-top: -6px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
-    <div id="wrapper">
-        <h1>canvas Simple Drawing</h1>
-        <a href="gallery.php">Gallery</a>
+<div id="header">
+    <h1 class="center">canvas Simple Drawing</h1>
+    <p><a href="gallery.php"><i class="fa fa-picture-o"></i> Visit gallery</a></p>
+</div>
+<div id="wrapper" class="grid">
+    <div class="col_12">
+        <div class="center">
+            <canvas id="draw_canvas"></canvas>
+        </div>
 
-        <input type="text" id="title_area">
-        <div id="resize_area">
-            <input type="number" id="input_width" value="500">x<input type="number" id="input_height" value="400">
+        <div id="controls" class="center">
+            <input type="text" id="color_picker" value="333" class="jscolor">
+            <input type="range" id="line_width" class="col_7" min="1" max="20" step="1" value="3">
+            <label id="line_indicator" for="line_width" class="col_1">3</label>
+        </div>
+        <div class="col_12 center">
+            <label for="title_area">Title</label>
+            <input type="text" id="title_area" class="col_7" placeholder="Untitled">
+        </div>
+        <div id="buttons" class="col_12 center">
+            <button id="submit" class="large green"><i class="fa fa-upload"></i> Submit picture</button>
+            <button id="clear" class="large orange"><i class="fa fa-trash"></i> Clear picture</button>
+        </div>
+        <div id="resize_area" class="center">
+            <input type="number" id="input_width" value="500" class="col_1">x<input type="number" id="input_height" value="400" class="col_1">
             <button id="resize_canvas">Resize</button>
         </div>
-
-        <canvas id="draw_canvas"></canvas>
-
-        <div id="controls">
-            <input type="color" id="color_picker">
-            <input type="range" id="line_width" min="1" max="20" step="1" value="3">
-            <output id="line_indicator">3</output>
-            <button id="submit">Submit picture</button>
-            <button id="clear">Clear picture</button>
-        </div>
     </div>
-
+</div>
     <script>
         var canvas,
             $$ = function(id) { return document.getElementById(id); },
@@ -46,7 +103,7 @@
         };
         canvas = generateCanvas();
 
-        bind($$('line_width'), 'change', function(ev) {
+        bind($$('line_width'), 'input', function(ev) {
             var val = ev.target.value;
             canvas.context.lineWidth = val;
             $$('line_indicator').innerText = val;
@@ -54,7 +111,7 @@
 
         bind($$('color_picker'), 'change', function(ev) {
             var val = ev.target.value;
-            canvas.context.strokeStyle = val;
+            canvas.context.strokeStyle = '#' + val;
         });
 
         bind($$('resize_canvas'), 'click', function(ev) {
