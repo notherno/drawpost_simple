@@ -1,6 +1,7 @@
 /*
  * DrawCanvas
  */
+'use strict';
 
 var DrawCanvas = (function() {
     function DrawCanvas(canvasid, width, height) {
@@ -19,15 +20,31 @@ var DrawCanvas = (function() {
     DrawCanvas.prototype.addEvents = function() {
         var that = this;
 
+        var find_pos = function (ev, elm) {
+            var x, y;
+            if (ev.targetTouches) {
+                x = ev.targetTouches[0].pageX - ev.target.offsetLeft;
+                y = ev.targetTouches[0].pageY - ev.target.offsetTop;
+            } else {
+                x = ev.pageX - elm.offsetLeft;
+                y = ev.pageY - elm.offsetTop;
+            }
+            return {x: x, y: y};
+        };
+
         var line_start = function(ev) {
+            var pos = find_pos(ev, that.canvas);
+
             that.context.beginPath();
-            that.context.moveTo(ev.layerX, ev.layerY);
+            that.context.moveTo(pos.x, pos.y);
             that.started = true;
         };
 
         var line_move = function(ev) {
             if (that.started) {
-                that.context.lineTo(ev.layerX, ev.layerY);
+                var pos = find_pos(ev, that.canvas);
+
+                that.context.lineTo(pos.x, pos.y);
                 that.context.stroke();
             }
         };
