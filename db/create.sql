@@ -5,5 +5,7 @@ CREATE TABLE pictures (
     title    TEXT,
     src      TEXT,
     created  TIMESTAMP
+    width    INTEGER,
+    height   INTEGER
 );
 

@@ -30,12 +30,14 @@ class PictureDao {
         return $resx[0];
     }
 
-    public function save_picture ($title, $filename) {
+    public function save_picture ($title, $filename, $width, $height) {
         $statement = $this->handle->prepare(
-            "INSERT INTO pictures (title, src, created) VALUES (:title, :filename, :timestamp);"
+            "INSERT INTO pictures (title, src, width, height, created) VALUES (:title, :filename, :width, :height, :timestamp);"
         );
         $statement->bindValue(':title', $title);
         $statement->bindValue(':filename', $filename);
+        $statement->bindValue(':width', $width);
+        $statement->bindValue(':height', $height);
         $statement->bindValue(':timestamp', self::get_timestamp());
         return $statement->execute();
     }

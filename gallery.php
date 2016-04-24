@@ -71,7 +71,7 @@
                 <h2><?php echo htmlspecialchars($pic['title']); ?></h2>
                 <time><?php echo $pic['created']; ?></time>
                 <div>
-                    <img src="<?php echo $UPLOAD_DIR . $pic['src']; ?>">
+                    <img src="<?php echo $UPLOAD_DIR . $pic['src']; ?>" width="<?php echo $pic['width']; ?>" height="<?php echo $pic['height']; ?>">
                 </div>
             </li>
 <?php

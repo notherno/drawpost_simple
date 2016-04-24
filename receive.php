@@ -11,10 +11,18 @@
 
     $dataurl = isset($_POST['img']) ? $_POST['img'] : NULL;
     $title = isset($_POST['title']) && $_POST['title'] ? $_POST['title'] : 'Untitled';
+    $width = isset($_POST['width']) && ctype_digit($_POST['width']) ? $_POST['width'] : null;
+    $height = isset($_POST['height']) && ctype_digit($_POST['height']) ? $_POST['height'] : null;
+
 
     if (! $dataurl) {
         http_response_code(400);
-        exit('No image data available');
+        exit('Error: No image data available');
+    }
+
+    if (!$width || !$height) {
+        http_response_code(400);
+        exit('Error: Image size not available');
     }
 
     // Cutout data from dataURI
@@ -31,7 +39,7 @@
 
     // Data inserion into SQLite3 database
     $dao = new PictureDao('db/db.sqlite');
-    $dao->save_picture($title, $filename);
+    $dao->save_picture($title, $filename, $width, $height);
 
     http_response_code(200);
     exit($dist . '/' . $filename);
