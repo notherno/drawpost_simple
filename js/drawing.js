@@ -57,12 +57,18 @@ var DrawCanvas = (function() {
         };
 
         // Add event listeners to the canvas
-        this.canvas.addEventListener('mousedown', line_start, false);
-        this.canvas.addEventListener('touchstart', line_start, false);
-        this.canvas.addEventListener('mouseup', line_end, false);
-        this.canvas.addEventListener('touchend', line_end, false);
-        this.canvas.addEventListener('mousemove', line_move, false);
-        this.canvas.addEventListener('touchmove', line_move, false);
+        var binding_events = {
+            'mousedown': line_start,
+            'touchstart': line_start,
+            'mouseup': line_end,
+            'touchend': line_end,
+            'mousemove': line_move,
+            'touchmove': line_move
+        };
+
+        for (var trig in binding_events) {
+            this.canvas.addEventListener(trig, binding_events[trig], false);
+        }
     };
 
     DrawCanvas.prototype.initialize = function() {
