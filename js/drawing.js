@@ -20,7 +20,7 @@ var DrawCanvas = (function() {
     DrawCanvas.prototype.addEvents = function() {
         var that = this;
 
-        var find_pos = function (ev, elm) {
+        var find_pos = function (ev) {
             var x, y;
             if (ev.targetTouches) {
                 x = ev.targetTouches[0].pageX - ev.target.offsetLeft;
@@ -33,7 +33,7 @@ var DrawCanvas = (function() {
         };
 
         var line_start = function(ev) {
-            var pos = find_pos(ev, that.canvas);
+            var pos = find_pos(ev);
 
             that.context.beginPath();
             that.context.moveTo(pos.x, pos.y);
@@ -43,7 +43,7 @@ var DrawCanvas = (function() {
 
         var line_move = function(ev) {
             if (that.started) {
-                var pos = find_pos(ev, that.canvas);
+                var pos = find_pos(ev);
 
                 that.context.lineTo(pos.x, pos.y);
                 that.context.stroke();
