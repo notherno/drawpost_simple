@@ -11,11 +11,64 @@ var DrawCanvas = (function() {
         this.width = this.canvas.width = width;
         this.height = this.canvas.height = height;
 
+        this.history = [];
+        this.history_pointer = null;
+
         this.addEvents();
         this.started = false;
 
         this.initialize();
     }
+
+    DrawCanvas.prototype.can_undo = function () {
+        if (this.history_pointer == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    DrawCanvas.prototype.can_redo = function () {
+        if (this.history_pointer == this.history.length - 1) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    DrawCanvas.prototype.undo = function () {
+        if (this.can_undo()) {
+            this.putImage(this.history[--this.history_pointer]);
+        }
+        return this.can_undo();
+    };
+
+    DrawCanvas.prototype.redo = function () {
+        if (this.can_redo()) {
+            this.putImage(this.history[++this.history_pointer]);
+        }
+        return this.can_redo();
+    };
+
+    DrawCanvas.prototype.add_history = function () {
+		if (this.history_pointer === null) {
+			this.history_pointer = 0;
+		} else {
+            while (canvas.history.length - 1 != canvas.history_pointer) {
+                this.history.pop();
+            }
+			this.history_pointer++;
+		}
+		this.history.push(this.getImage());
+    };
+
+    DrawCanvas.prototype.getImage = function () {
+        return this.context.getImageData(0, 0, this.width, this.height);
+    };
+
+    DrawCanvas.prototype.putImage = function (imgData) {
+        return this.context.putImageData(imgData, 0, 0);
+    };
 
     DrawCanvas.prototype.addEvents = function() {
         var that = this;
@@ -53,6 +106,8 @@ var DrawCanvas = (function() {
 
         var line_end = function(ev) {
             that.started = false;
+
+            that.add_history();
             ev.preventDefault();
         };
 
@@ -74,6 +129,7 @@ var DrawCanvas = (function() {
     DrawCanvas.prototype.initialize = function() {
         this.context.fillStyle = '#FFF';
         this.context.fillRect(0, 0, this.width, this.height);
+        this.add_history();
 
         // Line properties
         this.context.lineJoin = 'bevel';
