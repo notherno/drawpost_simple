@@ -40,6 +40,7 @@
     // Data inserion into SQLite3 database
     $dao = new PictureDao('db/db.sqlite');
     $dao->save_picture($title, $filename, $width, $height);
+    $dao->close();
 
     http_response_code(200);
     exit($dist . '/' . $filename);

@@ -8,6 +8,10 @@ class PictureDao {
         $this->handle = new SQLite3($filename);
     }
 
+    public function close () {
+        $this->handle->close();
+    }
+
     public function get_pictures ($offset, $limit) {
         $statement = $this->handle->prepare(
                 "SELECT * FROM pictures ORDER BY created DESC LIMIT :limit OFFSET :offset;"

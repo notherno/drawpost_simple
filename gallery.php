@@ -2,6 +2,7 @@
     require_once('db/pictureDao.php');
     $dao = new PictureDao('db/db.sqlite');
     $pictures = $dao->get_pictures(0, 50);
+    $dao->close();
 
     $UPLOAD_DIR = 'upload/';
 
