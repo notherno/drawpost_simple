@@ -63,13 +63,15 @@
 </div>
 <div id="wrapper" class="grid">
     <div class="col_12">
+        <div id="ctl-buttons" class="center">
+            <button id="undo"><i class="fa fa-undo"></i> Undo</button>
+            <button id="redo"><i class="fa fa-repeat"></i> Redo</button>
+        </div>
         <div class="center">
             <canvas id="draw_canvas"></canvas>
         </div>
 
         <div id="controls" class="center">
-            <button id="undo"><i class="fa fa-undo"></i> Undo</button>
-            <button id="redo"><i class="fa fa-repeat"></i> Redo</button>
             <input type="text" id="color_picker" value="333" class="jscolor" disabled>
             <input type="range" id="line_width" class="col_7" min="1" max="20" step="1" value="3">
             <label id="line_indicator" for="line_width" class="col_1">3</label>
