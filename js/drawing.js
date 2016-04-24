@@ -26,8 +26,8 @@ var DrawCanvas = (function() {
                 x = ev.targetTouches[0].pageX - ev.target.offsetLeft;
                 y = ev.targetTouches[0].pageY - ev.target.offsetTop;
             } else {
-                x = ev.pageX - elm.offsetLeft;
-                y = ev.pageY - elm.offsetTop;
+                x = ev.pageX - ev.target.offsetLeft;
+                y = ev.pageY - ev.target.offsetTop;
             }
             return {x: x, y: y};
         };
