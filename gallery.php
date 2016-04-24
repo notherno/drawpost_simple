@@ -80,8 +80,10 @@
     </ul>
     </div>
 <script>
-    $('#gallery_list').masonry({
-        itemSelector: '.post'
+    $(window).load(function () {
+        $('#gallery_list').masonry({
+            itemSelector: '.post'
+        });
     });
 </script>
 </body>
