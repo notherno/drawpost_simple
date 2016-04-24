@@ -38,6 +38,7 @@ var DrawCanvas = (function() {
             that.context.beginPath();
             that.context.moveTo(pos.x, pos.y);
             that.started = true;
+            ev.preventDefault();
         };
 
         var line_move = function(ev) {
@@ -46,11 +47,13 @@ var DrawCanvas = (function() {
 
                 that.context.lineTo(pos.x, pos.y);
                 that.context.stroke();
+                ev.preventDefault();
             }
         };
 
         var line_end = function(ev) {
             that.started = false;
+            ev.preventDefault();
         };
 
         // Add event listeners to the canvas
