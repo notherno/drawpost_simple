@@ -75,13 +75,26 @@ var DrawCanvas = (function() {
 
         var find_pos = function (ev) {
             var x, y;
+
+            // pageX, pageY are coordinates from
+            // top-left corner of the page
             if (ev.targetTouches) {
-                x = ev.targetTouches[0].pageX - ev.target.offsetLeft;
-                y = ev.targetTouches[0].pageY - ev.target.offsetTop;
+                x = ev.targetTouches[0].pageX;
+                y = ev.targetTouches[0].pageY;
             } else {
-                x = ev.pageX - ev.target.offsetLeft;
-                y = ev.pageY - ev.target.offsetTop;
+                x = ev.pageX;
+                y = ev.pageY;
             }
+
+            var p = ev.target;
+            while (p !== null) {
+                // Trace DOM tree and subtract
+                // offsets of all parent DOM objects
+                x -= p.offsetLeft;
+                y -= p.offsetTop;
+                p = p.offsetParent;
+            }
+
             return {x: x, y: y};
         };
 
