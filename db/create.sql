@@ -4,7 +4,7 @@ CREATE TABLE pictures (
     id       INTEGER PRIMARY KEY AUTOINCREMENT,
     title    TEXT,
     src      TEXT,
-    created  TIMESTAMP
+    created  TIMESTAMP,
     width    INTEGER,
     height   INTEGER
 );
