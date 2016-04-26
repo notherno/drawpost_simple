@@ -117,6 +117,7 @@
         bind(getById('color_picker'), 'change', function(ev) {
             var val = ev.target.value;
             canvas.context.strokeStyle = '#' + val;
+            canvas.context.shadowColor = '#' + val;
         });
 
         bind(getById('resize_canvas'), 'click', function(ev) {
