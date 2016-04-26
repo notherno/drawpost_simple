@@ -148,7 +148,6 @@ var DrawCanvas = (function() {
         this.context.lineJoin = 'round';
         this.context.lineCap = 'round';
         this.context.shadowBlur = 1;
-        this.context.shadowColor = '#333';
     };
 
     DrawCanvas.prototype.submitImg = function(url, param) {
