@@ -145,9 +145,10 @@ var DrawCanvas = (function() {
         this.add_history();
 
         // Line properties
-        this.context.lineJoin = 'bevel';
+        this.context.lineJoin = 'round';
         this.context.lineCap = 'round';
-        this.context.setLineDash([]);
+        this.context.shadowBlur = 1;
+        this.context.shadowColor = '#4545ff';
     };
 
     DrawCanvas.prototype.submitImg = function(url, param) {
