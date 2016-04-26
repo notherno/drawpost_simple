@@ -11,54 +11,10 @@
 <head>
     <title>Upload gallery</title>
 	<link rel="stylesheet" href="css/kickstart.css">
+	<link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/masonry.pkgd.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background:#efefef url(css/img/gray_jean.png);
-        }
-
-        #header {
-            margin: 0;
-            text-align: center;
-        }
-
-        #header h1 {
-            font-size: 2em;
-        }
-
-        #gallery_list {
-            margin: 0;
-            list-style-type: none;
-        }
-
-        .post {
-            width: 300px;
-            padding: 10px;
-        }
-
-        .post h2 {
-            font-size: 1.2em;
-            margin: 0;
-        }
-
-        .post time {
-            display: block;
-            font-size: 0.7em;
-            text-align: right;
-            color: #808080;
-            padding-right: 1em;
-        }
-
-        .post img {
-            width: 270px;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
     <div id="header">

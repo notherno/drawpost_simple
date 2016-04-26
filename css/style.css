@@ -1,70 +1,44 @@
 body {
-	background-color: #DDD;
+    margin: 0;
+    padding: 0;
+    background:#efefef url(css/img/gray_jean.png);
 }
 
-#wrapper {
-	margin: 0 auto;
-	width: 800px;
+#header {
+    margin: 0;
+    text-align: center;
 }
 
-#draw_canvas {
-	background-color: #FFF;
-	display: block;
-	margin: 0 auto;
-}
-
-#controls {
-	width: 500px;
-	margin: 10px auto;
-	overflow: hidden;
-}
-
-#resize_area {
-    margin: 5px;
-}
-
-#resize_area input[type=text] {
-    width: 5em;
-}
-
-input#line_width {
-	width: 80%;
-	display: block;
-	float: left;
-}
-
-input#color_picker {
-	float: left;
-    display: block;
-    margin: 2px;
-    width: 8%;
-}
-
-output#line_indicator {
-	display: block;
-	width: 8%;
-	float: right;
-}
-
-button#submit {
-    clear: both;
-    display: block;
-    width: 200px;
-    font-size: 150%;
-    background-color: lightgreen;
-    margin: 30px auto;
-}
-
-button#clear {
-    clear: both;
-    display: block;
-    width: 200px;
-    font-size: 150%;
-    background-color: lightblue;
-    margin: 30px auto;
+#header h1 {
+    font-size: 2em;
 }
 
 #gallery_list {
+    margin: 0;
     list-style-type: none;
+}
+
+.post {
+    width: 300px;
+    padding: 10px;
+}
+
+.post h2 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.post time {
+    display: block;
+    font-size: 0.7em;
+    text-align: right;
+    color: #808080;
+    padding-right: 1em;
+}
+
+.post img {
+    width: 270px;
+    display: block;
+    margin: 0 auto;
 }
 
