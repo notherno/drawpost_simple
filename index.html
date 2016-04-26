@@ -93,38 +93,38 @@
 </div>
     <script>
         var canvas,
-            $$ = function(id) { return document.getElementById(id); },
+            getById = function(id) { return document.getElementById(id); },
             bind = function(elm, ev, func) { elm.addEventListener(ev, func, false); };
 
         var generateCanvas = function() {
-            var width = $$('input_width').value;
-            var height = $$('input_height').value;
+            var width = getById('input_width').value;
+            var height = getById('input_height').value;
             var cv = new DrawCanvas('draw_canvas', width, height); 
 
-            cv.context.lineWidth = $$('line_width').value;
-            cv.context.strokeStyle = $$('color_picker').value;
+            cv.context.lineWidth = getById('line_width').value;
+            cv.context.strokeStyle = getById('color_picker').value;
 
             return cv;
         };
         canvas = generateCanvas();
 
-        bind($$('line_width'), 'input', function(ev) {
+        bind(getById('line_width'), 'input', function(ev) {
             var val = ev.target.value;
             canvas.context.lineWidth = val;
-            $$('line_indicator').innerText = val;
+            getById('line_indicator').innerText = val;
         });
 
-        bind($$('color_picker'), 'change', function(ev) {
+        bind(getById('color_picker'), 'change', function(ev) {
             var val = ev.target.value;
             canvas.context.strokeStyle = '#' + val;
         });
 
-        bind($$('resize_canvas'), 'click', function(ev) {
+        bind(getById('resize_canvas'), 'click', function(ev) {
             canvas = generateCanvas();
         });
 
-        bind($$('submit'), 'click', function(ev) {
-            var title = $$('title_area').value;
+        bind(getById('submit'), 'click', function(ev) {
+            var title = getById('title_area').value;
             canvas.submitImg('receive.php',
             {
                 title: title,
@@ -133,14 +133,14 @@
             });
         });
 
-        bind($$('clear'), 'click', function(ev) {
+        bind(getById('clear'), 'click', function(ev) {
             canvas.initialize();
         });
 
-        bind($$('undo'), 'click', function(ev) {
+        bind(getById('undo'), 'click', function(ev) {
             canvas.undo();
         });
-        bind($$('redo'), 'click', function(ev) {
+        bind(getById('redo'), 'click', function(ev) {
             canvas.redo();
         });
 
