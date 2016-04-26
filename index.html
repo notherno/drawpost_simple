@@ -5,8 +5,8 @@
     <title>canvas Simple Drawing</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
 
-	<link rel="stylesheet" href="css/kickstart.css">
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/kickstart.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/jscolor.min.js"></script>
     <script src="js/drawing.js"></script>
 </head>
@@ -79,12 +79,10 @@
 
         bind(getById('submit'), 'click', function(ev) {
             var title = getById('title_area').value;
-            canvas.submitImg('receive.php',
-            {
-                title: title,
-                width: canvas.width,
-                height: canvas.height
-            });
+            canvas.submitImg(
+                'receive.php',
+                {title: title, width: canvas.width, height: canvas.height}
+            );
         });
 
         bind(getById('clear'), 'click', function(ev) {
