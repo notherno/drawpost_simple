@@ -42,6 +42,23 @@ body {
     margin: 0 auto;
 }
 
+#canvas_wrap {
+    position: relative;
+    margin: 10px auto;
+    width: 500px;
+    height: 400px;
+}
+
+#canvas_wrap canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
 #color_picker {
     width: 50px;
     text-indent: 100%;
