@@ -41,6 +41,9 @@
             <input type="number" id="input_width" value="500" class="col_1"><i class="fa fa-times"></i><input type="number" id="input_height" value="400" class="col_1">
             <button id="resize_canvas">Resize</button>
         </div>
+        <div id="upload-controller" class="col_12 center">
+            <input type="file" id="file-selector" accept="image/*">
+        </div>
     </div>
 </div>
     <script>
@@ -94,6 +97,22 @@
         });
         bind(getById('redo'), 'click', function(ev) {
             canvas.redo();
+        });
+
+        bind(getById('file-selector'), 'change', function(ev) {
+            var img = new Image();
+            var freader = new FileReader();
+            freader.readAsDataURL(ev.target.files[0]);
+            freader.onload = function () {
+                img.src = freader.result;
+                canvas = new DrawCanvas('draw_canvas', img.width, img.height); 
+                getById('input_width').value = img.width;
+                getById('input_height').value = img.height;
+                getById('canvas_wrap').style.width = img.width + 'px';
+                getById('canvas_wrap').style.height = img.height + 'px';
+                canvas.context.drawImage(img, 0, 0);
+                canvas.history = [canvas.getImage()];
+            };
         });
 
     </script>
