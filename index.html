@@ -15,16 +15,15 @@
     <h1 class="center">canvas Simple Drawing</h1>
     <p><a href="gallery.php"><i class="fa fa-picture-o"></i> Visit gallery</a></p>
 </div>
+<div id="canvas_wrap">
+    <canvas id="draw_canvas"></canvas>
+</div>
 <div id="wrapper" class="grid">
     <div class="col_12">
         <div id="ctl-buttons" class="center">
             <button id="undo"><i class="fa fa-undo"></i> Undo</button>
             <button id="redo"><i class="fa fa-repeat"></i> Redo</button>
         </div>
-        <div id="canvas_wrap">
-            <canvas id="draw_canvas"></canvas>
-        </div>
-
         <div id="controls" class="center">
             <input type="text" id="color_picker" value="333" class="jscolor" disabled>
             <input type="range" id="line_width" class="col_7" min="1" max="20" step="1" value="3">
@@ -39,8 +38,11 @@
             <button id="clear" class="large orange"><i class="fa fa-trash"></i> Clear picture</button>
         </div>
         <div id="resize_area" class="center">
-            <input type="number" id="input_width" value="500" class="col_1">x<input type="number" id="input_height" value="400" class="col_1">
+            <input type="number" id="input_width" value="500" class="col_1"><i class="fa fa-times"></i><input type="number" id="input_height" value="400" class="col_1">
             <button id="resize_canvas">Resize</button>
+        </div>
+        <div id="upload-controller" class="col_12 center">
+            <input type="file" id="file-selector" accept="image/*">
         </div>
     </div>
 </div>
@@ -95,6 +97,22 @@
         });
         bind(getById('redo'), 'click', function(ev) {
             canvas.redo();
+        });
+
+        bind(getById('file-selector'), 'change', function(ev) {
+            var img = new Image();
+            var freader = new FileReader();
+            freader.readAsDataURL(ev.target.files[0]);
+            freader.onload = function () {
+                img.src = freader.result;
+                canvas = new DrawCanvas('draw_canvas', img.width, img.height); 
+                getById('input_width').value = img.width;
+                getById('input_height').value = img.height;
+                getById('canvas_wrap').style.width = img.width + 'px';
+                getById('canvas_wrap').style.height = img.height + 'px';
+                canvas.context.drawImage(img, 0, 0);
+                canvas.history = [canvas.getImage()];
+            };
         });
 
     </script>
