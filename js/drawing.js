@@ -20,6 +20,19 @@ var DrawCanvas = (function() {
         this.initialize();
     }
 
+    DrawCanvas.prototype.addLayer = function (wrapper) {
+        var layer = document.createElement('canvas');
+        document.getElementById(wrapper).appendChild(layer);
+        layer.width = this.width;
+        layer.height = this.height;
+        layer.style.zindex = 3;
+        layer.style.position = 'absolute';
+
+        var ctx = layer.getContext('2d');
+        ctx.fillStyle = '#EEE';
+        ctx.fillRect(0, 0, this.width, this.height);
+    };
+
     DrawCanvas.prototype.can_undo = function () {
         if (this.history_pointer == 0) {
             return false;
